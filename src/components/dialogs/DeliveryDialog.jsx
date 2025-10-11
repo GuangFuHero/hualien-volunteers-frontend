@@ -44,7 +44,7 @@ export default function DeliveryDialog({ open, onClose, request, onSubmittedCall
 			status: request.headcount_got + Number(joinCount) === request.headcount_need ? "completed" : "active"
 		}
 		const result = await safeApiRequest(
-			`https://guangfu250923.pttapp.cc/human_resources/${request.id}`,
+			`${process.env.REACT_APP_API_BASE_URL}/human_resources/${request.id}`,
 			{
 				method: "PATCH",
 				headers: {
