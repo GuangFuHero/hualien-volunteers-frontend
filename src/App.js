@@ -51,7 +51,8 @@ export default function App() {
   }, [page, requestState]);
 
   React.useEffect(() => {
-    renderCards(originalData)
+    // Reload data whenever filters change so server-side filtering (q_role) is applied
+    loadData(page, requestState, true);
   }, [listFilter])
   function renderCards(data) {
     //擋掉soft deleted 的資料:  {status:"need_delete"}
@@ -77,7 +78,7 @@ export default function App() {
   const loadData = async (offset, state, shouldScrollThePage) => {
     setIsLoading(true)
     const result = await safeApiRequest(
-      `${process.env.REACT_APP_API_BASE_URL}/human_resources?limit=20&offset=${offset * 20}&status=${state}`
+      `${process.env.REACT_APP_API_BASE_URL}/human_resources?limit=20&offset=${offset * 20}&status=${state}&q_role=${listFilter}`
     );
     if (result.success) {
       setOriginalData(result.data.member)
