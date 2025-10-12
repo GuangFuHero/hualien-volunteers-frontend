@@ -43,7 +43,7 @@ export default function CreateDialog({ open, onClose, onSubmittedCallback = (isS
       is_completed: false
     }
     const result = await safeApiRequest(
-      `https://guangfu250923.pttapp.cc/human_resources`,
+      `${process.env.REACT_APP_API_BASE_URL}/human_resources`,
       {
         method: "POST",
         headers: {
@@ -127,8 +127,18 @@ export default function CreateDialog({ open, onClose, onSubmittedCallback = (isS
                   onChange={handleChange}
                 />
               </Grid>
-
-              <Grid size={{ xs: 6, md: 6 }}>
+              <Grid size={12} height="100%">
+                <Alert severity="info" icon={false}>
+                  <AlertTitle>如有以下需求可先撥打專線</AlertTitle>
+                  <ul style={{ margin: 0, paddingLeft: 15 }}>
+                    <li style={{ marginBottom:5 }}><Typography fontWeight={600}>機具：0982-233-415</Typography>可支援大小機具：山貓、夾子車、怪手、清溝車等</li>
+                    <li style={{ marginBottom:5 }}><Typography fontWeight={600}>排水：0972-223-354</Typography>24小時服務｜建物水不通</li>
+                    <li style={{ marginBottom:5 }}><Typography fontWeight={600}>水電：0972-223-354</Typography>24小時服務｜受災戶內部修繕</li>
+                  </ul>
+                </Alert>
+              </Grid>
+              
+              <Grid size={{ xs: 12, md: 6 }}>
                 <FormControl required fullWidth>
                   <InputLabel id="role-type-select-label">需求類別</InputLabel>
                   <Select
@@ -150,7 +160,7 @@ export default function CreateDialog({ open, onClose, onSubmittedCallback = (isS
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid size={{ xs: 6, md: 6 }}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <TextField
                   fullWidth required
                   label="需求名稱"
