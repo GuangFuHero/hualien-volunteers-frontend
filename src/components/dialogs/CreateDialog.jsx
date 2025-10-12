@@ -195,7 +195,7 @@ export default function CreateDialog({ open, onClose, onSubmittedCallback = (isS
           <Alert severity="primary"><AlertTitle>注意：目前無法修改需求</AlertTitle>請再次確認資料是否正確</Alert>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose} color="inherit">取消</Button>
+          <Button onClick={() => { setAgreeTerms(false); onClose() }} color="inherit">取消</Button>
           <Button
             variant="contained"
             onClick={() => setDisplayConfirmDialog(true)}
