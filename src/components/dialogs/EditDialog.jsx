@@ -44,7 +44,7 @@ export default function EditDialog({ open, onClose, request, onSubmittedCallback
       payload.is_completed = true
     }
     const result = await safeApiRequest(
-      `https://guangfu250923.pttapp.cc/human_resources/${request.id}`,
+      `${process.env.REACT_APP_API_BASE_URL}/human_resources/${request.id}`,
       {
         method: "PATCH",
         headers: {

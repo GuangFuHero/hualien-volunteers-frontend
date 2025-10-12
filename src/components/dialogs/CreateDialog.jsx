@@ -42,7 +42,7 @@ export default function CreateDialog({ open, onClose, onSubmittedCallback = (isS
       role_status: "pending"
     }
     const result = await safeApiRequest(
-      `https://guangfu250923.pttapp.cc/human_resources`,
+      `${process.env.REACT_APP_API_BASE_URL}/human_resources`,
       {
         method: "POST",
         headers: {

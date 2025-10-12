@@ -77,7 +77,7 @@ export default function App() {
   const loadData = async (offset, state, shouldScrollThePage) => {
     setIsLoading(true)
     const result = await safeApiRequest(
-      `https://guangfu250923.pttapp.cc/human_resources?limit=20&offset=${offset * 20}&status=${state}`
+      `${process.env.REACT_APP_API_BASE_URL}/human_resources?limit=20&offset=${offset * 20}&status=${state}`
     );
     if (result.success) {
       setOriginalData(result.data.member)
