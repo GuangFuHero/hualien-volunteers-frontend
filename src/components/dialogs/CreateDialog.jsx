@@ -128,7 +128,7 @@ export default function CreateDialog({ open, onClose, onSubmittedCallback = (isS
               </Grid>
               <Grid size={12} height="100%">
                 <Alert severity="info" icon={false}>
-                  <AlertTitle>如果以下需求可先撥打專線</AlertTitle>
+                  <AlertTitle>如有以下需求可先撥打專線</AlertTitle>
                   <ul style={{ margin: 0, paddingLeft: 15 }}>
                     <li style={{ marginBottom:5 }}><Typography fontWeight={600}>機具：0982-233-415</Typography>可支援大小機具：山貓、夾子車、怪手、清溝車等</li>
                     <li style={{ marginBottom:5 }}><Typography fontWeight={600}>排水：0972-223-354</Typography>24小時服務｜建物水不通</li>
