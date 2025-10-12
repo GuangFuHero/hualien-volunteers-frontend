@@ -195,10 +195,10 @@ export default function CreateDialog({ open, onClose, onSubmittedCallback = (isS
           <Alert severity="primary"><AlertTitle>注意：目前無法修改需求</AlertTitle>請再次確認資料是否正確</Alert>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose} color="inherit">取消</Button>
+          <Button onClick={() => { setAgreeTerms(false); onClose() }} color="inherit">取消</Button>
           <Button
             variant="contained"
-            onClick={() => setDisplayConfirmDialog(true)}
+            onClick={() => { setDisplayConfirmDialog(true) }}
             disabled={
               form.address === "" ||
               form.org === "" ||
@@ -234,7 +234,7 @@ export default function CreateDialog({ open, onClose, onSubmittedCallback = (isS
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setDisplayConfirmDialog(false)} color="inherit">返回修改</Button>
-          <Button variant="contained" onClick={() => onConfirm(form)} loading={isLoading}>確認送出</Button>
+          <Button variant="contained" onClick={() => { onConfirm(form); setAgreeTerms(false) }} loading={isLoading}>確認送出</Button>
         </DialogActions>
       </StyledDialog>
     </>
