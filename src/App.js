@@ -162,7 +162,7 @@ export default function App() {
             <Chip color={listFilter.includes("一般志工") ? "primary" : ""} label="一般志工" sx={{ mr: 1 }} onClick={() => { setListFilter(["一般志工"]) }} />
             <Chip color={listFilter.includes("水電") ? "primary" : ""} label="水電" sx={{ mr: 1 }} onClick={() => { setListFilter(["水電"]) }} />
             <Chip color={listFilter.includes("機具") ? "primary" : ""} label="機具" sx={{ mr: 1 }} onClick={() => { setListFilter(["機具", "山貓", "怪手", "挖土機"]) }} />
-
+            <Chip color={listFilter.includes("門") ? "primary" : ""} label="門窗" sx={{ mr: 1 }} onClick={() => { setListFilter(["門", "窗"]) }} />
           </Box>
           {(requests.length === 0 && isLoading) && <>
             <Stack spacing={1}>

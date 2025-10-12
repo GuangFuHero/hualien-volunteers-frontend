@@ -39,7 +39,8 @@ export default function CreateDialog({ open, onClose, onSubmittedCallback = (isS
       ...newRequest,
       headcount_need: Number(newRequest.headcount_need),
       status: "active",
-      role_status: "pending"
+      role_status: "pending",
+      is_completed: false
     }
     const result = await safeApiRequest(
       `https://guangfu250923.pttapp.cc/human_resources`,
