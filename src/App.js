@@ -48,12 +48,14 @@ export default function App() {
 
   useEffect(() => {
     loadData(page, requestState, true);
-  }, [page, requestState]);
+  }, [page]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Reload data whenever filters change so server-side filtering (q_role) is applied
+    setPage(0)
     loadData(page, requestState, true);
-  }, [listFilter])
+  }, [listFilter, requestState])
+
   function renderCards(data) {
     //擋掉soft deleted 的資料:  {status:"need_delete"}
     const requests = data.filter(d => d.status !== "need_delete");
@@ -61,22 +63,23 @@ export default function App() {
     //依據更新時間進行排序
     const sortedRequests = [...requests].sort((a, b) => b.updated_at - a.updated_at);
 
-    const filtreedRequest = [...sortedRequests].filter(item => {
-      for (let i = 0; i < listFilter.length; i++) {
-        if (item.assignment_notes.includes(listFilter[i]) || item.role_name.includes(listFilter[i]) || item.role_type.includes(listFilter[i])) {
-          return true
-        }
-      }
-      return false
-    })
+    // const filtreedRequest = [...sortedRequests].filter(item => {
+    //   for (let i = 0; i < listFilter.length; i++) {
+    //     if (item.assignment_notes.includes(listFilter[i]) || item.role_name.includes(listFilter[i]) || item.role_type.includes(listFilter[i])) {
+    //       return true
+    //     }
+    //   }
+    //   return false
+    // })
 
 
-    setRequests(filtreedRequest)
+    setRequests(sortedRequests)
 
   }
 
   const loadData = async (offset, state, shouldScrollThePage) => {
     setIsLoading(true)
+    setRequests([])
     const result = await safeApiRequest(
       `${process.env.REACT_APP_API_BASE_URL}/human_resources?limit=20&offset=${offset * 20}&status=${state}&q_role=${listFilter}`
     );
