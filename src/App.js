@@ -184,6 +184,7 @@ export default function App() {
               request={req}
               onEdit={(data) => EditRequest(data)}
               onDelivery={(data) => DeliveryRequest(data)}
+              showToastMsg={(m) => setToastMsg(m)}
             />
           ))}
 

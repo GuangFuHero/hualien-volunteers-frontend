@@ -52,7 +52,7 @@ function getGoogleMapUrl(addr) {
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("花蓮 " + addr)}`
 }
 
-export default function RequestCard({ request, onEdit, onDelivery }) {
+export default function RequestCard({ request, onEdit, onDelivery, showToastMsg }) {
 
     const isRequestCompleted = isCompleted(request)
     const theme = useTheme();
@@ -71,7 +71,15 @@ export default function RequestCard({ request, onEdit, onDelivery }) {
         };
         return TYPE_MAP[role_type].cls
 
-    }
+    } const handleCopy = async (text) => {
+        try {
+            await navigator.clipboard.writeText(text);
+            showToastMsg("地址資訊已複製到剪貼簿")
+
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+        }
+    };
 
     return (
         <div style={{ position: "relative" }}>
@@ -82,7 +90,7 @@ export default function RequestCard({ request, onEdit, onDelivery }) {
                 <CardContent>
                     <Typography variant="h6" sx={{ mb: 1 }}>{isRequestCompleted && <><Chip color="success" label="已完成" sx={{ verticalAlign: "bottom", }} />&nbsp;&nbsp;</>}{request.org}</Typography>
                     <Typography variant="body2">
-                        <RoomIcon sx={{ fontSize: "inherit", verticalAlign: "text-top" }} /> <a style={{ color: "inherit" }} href={getGoogleMapUrl(request.address)} target="_blank">{request.address}</a>
+                        <RoomIcon sx={{ fontSize: "inherit", verticalAlign: "text-top" }} /> <Button sx={{ textTransform: "inherit" }} size="small" color="info" onClick={() => handleCopy(request.address)}><u>{request.address}</u></Button>
                     </Typography>
 
                     {!isRequestCompleted && <Typography variant="body2"><PersonIcon sx={{ fontSize: "inherit", verticalAlign: "text-top" }} /> {request.phone ? request.phone : "(未填寫電話號碼)"}</Typography>}
@@ -116,6 +124,6 @@ export default function RequestCard({ request, onEdit, onDelivery }) {
                     </Button>
                 </CardActions> : <CardActions><Typography sx={{ m: 1 }} color="primary">如仍有需求，請重新點選新增需求</Typography></CardActions>}
             </Card>
-        </div>
+        </div >
     );
 }
