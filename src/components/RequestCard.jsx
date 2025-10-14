@@ -71,7 +71,8 @@ export default function RequestCard({ request, onEdit, onDelivery, showToastMsg 
         };
         return TYPE_MAP[role_type].cls
 
-    } const handleCopy = async (text) => {
+    };
+    const handleCopy = async (text) => {
         try {
             await navigator.clipboard.writeText(text);
             showToastMsg("地址資訊已複製到剪貼簿")
@@ -80,6 +81,16 @@ export default function RequestCard({ request, onEdit, onDelivery, showToastMsg 
             console.error('Failed to copy text: ', err);
         }
     };
+
+    const handleCopyByDomElement = (value) => {
+        const el = document.createElement('textarea');
+        el.value = value;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        showToastMsg("地址資訊已複製到剪貼簿");
+    }
 
     return (
         <div style={{ position: "relative" }}>
@@ -90,7 +101,7 @@ export default function RequestCard({ request, onEdit, onDelivery, showToastMsg 
                 <CardContent>
                     <Typography variant="h6" sx={{ mb: 1 }}>{isRequestCompleted && <><Chip color="success" label="已完成" sx={{ verticalAlign: "bottom", }} />&nbsp;&nbsp;</>}{request.org}</Typography>
                     <Typography variant="body2">
-                        <RoomIcon sx={{ fontSize: "inherit", verticalAlign: "text-top" }} /> <Button sx={{ textTransform: "inherit" }} size="small" color="info" onClick={() => handleCopy(request.address)}><u>{request.address}</u></Button>
+                        <RoomIcon sx={{ fontSize: "inherit", verticalAlign: "text-top" }} /> <Button sx={{ textTransform: "inherit" }} size="small" color="info" onClick={() => handleCopyByDomElement(request.address)}><u>{request.address}</u></Button>
                     </Typography>
 
                     {!isRequestCompleted && <Typography variant="body2"><PersonIcon sx={{ fontSize: "inherit", verticalAlign: "text-top" }} /> {request.phone ? request.phone : "(未填寫電話號碼)"}</Typography>}
