@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
 import Select from '@mui/material/Select';
 import { safeApiRequest } from "../../utils/helpers";
 
@@ -140,7 +141,7 @@ export default function CreateDialog({ open, onClose, onSubmittedCallback = (isS
               </Grid>
 
               <Grid size={{ xs: 12, md: 6 }}>
-                <FormControl required fullWidth>
+                <FormControl required fullWidth disabled>
                   <InputLabel id="role-type-select-label">需求類別</InputLabel>
                   <Select
                     required
@@ -162,16 +163,30 @@ export default function CreateDialog({ open, onClose, onSubmittedCallback = (isS
                 </FormControl>
               </Grid>
               <Grid size={{ xs: 12, md: 6 }}>
-                <TextField
-                  fullWidth required
-                  label="需求名稱"
-                  placeholder="鏟子超人"
-                  name="role_name"
-                  type="text"
-                  value={form.role_name}
-                  onChange={handleChange}
-                />
+                <FormControl required fullWidth>
+                  <InputLabel id="role-name-select-label">需求名稱</InputLabel>
+                  <Select
+                    required
+                    labelId="role-name-select-label"
+                    name="role_name"
+                    label="需求名稱"
+                    value={form.role_name}
+                    onChange={handleChange}
+                  >
+
+                    <MenuItem value={"鏟子超人"}>鏟子超人</MenuItem>
+                    <MenuItem value={"清溝超人"}>清溝超人</MenuItem>
+                    <MenuItem value={"搬物超人"}>搬物超人</MenuItem>
+                    <MenuItem value={"廚師超人"}>廚師超人</MenuItem>
+                    <MenuItem value={"整理超人"}>整理超人</MenuItem>
+
+                  </Select>
+                </FormControl>
               </Grid>
+              <Grid size={12}>
+                <FormHelperText>目前媒合以一般志工為主，若有專業志工需求，建議您撥打上列專線</FormHelperText>
+              </Grid>
+
               <Grid size={{ xs: 6, md: 6 }}>
                 <TextField
                   fullWidth required
