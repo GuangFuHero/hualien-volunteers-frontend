@@ -3,7 +3,6 @@ import { Container, Box, Button, ThemeProvider, CssBaseline, Chip, Typography } 
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import RequestCard from "./components/RequestCard";
 import Pagination from "./components/Pagination";
 import Toast from "./components/Toast";
@@ -173,11 +172,11 @@ export default function App() {
               <Skeleton variant="text" sx={{ fontSize: '5rem' }} />
             </Stack>
           </>}
-          {(requests.length === 0 && !isLoading) && <>
+          {/* {(requests.length === 0 && !isLoading) && <>
             <Stack spacing={1}>
               <Typography variant="h6">此頁查無符合條件的需求，您可以點選下方分頁按鈕，切換至其他分頁</Typography>
             </Stack>
-          </>}
+          </>} */}
           {requests.map((req) => (
             <RequestCard
               key={req.id}
@@ -189,18 +188,14 @@ export default function App() {
           ))}
 
           <Pagination page={page + 1} onPageChange={handlePageChange} count={totalPage} />
-
-          <Box sx={{ mt: 3 }}>
-            <Footer />
-          </Box>
         </Container>
-
 
         <CreateDialog open={openCreate} onSubmittedCallback={onCreateSubmittedCallback} onClose={() => setOpenCreate(false)} />
         <EditDialog open={openEdit} onSubmittedCallback={onEditSubmittedCallback} request={editData} onClose={() => setOpenEdit(false)} />
         <DeliveryDialog open={openDelivery} onSubmittedCallback={onDeliverySubmittedCallback} onClose={() => setOpenDelivery(false)} request={deliveryData} />
 
         {/* <Maintenance/> */}
+
         <Toast message={toastMsg} onClose={() => setToastMsg("")} />
         <Analytics />
       </ThemeProvider>
