@@ -72,15 +72,6 @@ export default function RequestCard({ request, onEdit, onDelivery, showToastMsg 
         return TYPE_MAP[role_type].cls
 
     };
-    const handleCopy = async (text) => {
-        try {
-            await navigator.clipboard.writeText(text);
-            showToastMsg("地址資訊已複製到剪貼簿")
-
-        } catch (err) {
-            console.error('Failed to copy text: ', err);
-        }
-    };
 
     const handleCopyByDomElement = (value) => {
         const el = document.createElement('textarea');
