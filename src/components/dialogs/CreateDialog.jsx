@@ -187,7 +187,7 @@ export default function CreateDialog({ open, onClose, onSubmittedCallback = (isS
                 <FormHelperText>目前媒合以一般志工為主，若有專業志工需求，建議您撥打上列專線</FormHelperText>
               </Grid>
 
-              <Grid size={{ xs: 6, md: 6 }}>
+              <Grid size={9}>
                 <TextField
                   fullWidth required
                   label="數量"
@@ -199,9 +199,9 @@ export default function CreateDialog({ open, onClose, onSubmittedCallback = (isS
                   inputProps={{ min: 1 }}
                 />
               </Grid>
-              <Grid size={{ xs: 6, md: 6 }}>
+              <Grid size={3}>
                 <TextField
-                  fullWidth required
+                  fullWidth required disabled
                   label="量詞"
                   placeholder="人"
                   name="headcount_unit"
