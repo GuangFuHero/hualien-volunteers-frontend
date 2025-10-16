@@ -135,7 +135,7 @@ export default function CreateDialog({ open, onClose, onSubmittedCallback = (isS
                   <ul style={{ margin: 0, paddingLeft: 15 }}>
                     <li style={{ marginBottom: 5 }}><Typography fontWeight={600}>機具：0982-233-415</Typography>可支援大小機具：山貓、夾子車、怪手、清溝車等</li>
                     <li style={{ marginBottom: 5 }}><Typography fontWeight={600}>排水：0972-223-354</Typography>24小時服務｜建物水不通</li>
-                    <li style={{ marginBottom: 5 }}><Typography fontWeight={600}>水電：0972-223-354</Typography>24小時服務｜受災戶內部修繕</li>
+                    <li style={{ marginBottom: 5 }}><Typography fontWeight={600}>水電：03-8227171 #423,424</Typography>受災戶內部修繕</li>
                   </ul>
                 </Alert>
               </Grid>
