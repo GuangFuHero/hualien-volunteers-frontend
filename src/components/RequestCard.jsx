@@ -48,6 +48,11 @@ function getRelativeTime(timestamp) {
     return years === 1 ? "1 年前" : `${years} 年前`;
 }
 
+function getAbsoluteTime(timestamp) {
+    const date = new Date(timestamp * 1000);
+    return date.toLocaleString(undefined, { month: '2-digit', day: '2-digit', hour12: false, hour: 'numeric' });
+}
+
 function getGoogleMapUrl(addr) {
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("花蓮 " + addr)}`
 }
@@ -95,9 +100,17 @@ export default function RequestCard({ request, onEdit, onDelivery, showToastMsg 
                         <RoomIcon sx={{ fontSize: "inherit", verticalAlign: "text-top" }} /> <Button sx={{ textTransform: "inherit" }} size="small" color="info" onClick={() => handleCopyByDomElement(request.address)}><u>{request.address}</u></Button>
                     </Typography>
 
-                    {!isRequestCompleted && <Typography variant="body2"><PersonIcon sx={{ fontSize: "inherit", verticalAlign: "text-top" }} /> {request.phone ? request.phone : "(未填寫電話號碼)"}</Typography>}
+                    {!isRequestCompleted && <Typography variant="body2" sx={{ marginBottom: 1 }}><PersonIcon sx={{ fontSize: "inherit", verticalAlign: "text-top" }} /> {request.phone ? request.phone : "(未填寫電話號碼)"}</Typography>}
 
-                    <Typography variant="body2"><AccessTimeIcon sx={{ fontSize: "inherit", verticalAlign: "text-top" }} /> 最後更新於 {getRelativeTime(request.updated_at)}</Typography>
+                    {(request.created_at === request.updated_at)?
+                    <Typography variant="body2" sx={{ marginBottom: 1 }}>
+                        <AccessTimeIcon sx={{ fontSize: "inherit", verticalAlign: "text-top" }} /> 建立於 {getAbsoluteTime(request.created_at)} ({getRelativeTime(request.created_at)})
+                    </Typography>
+                    :
+                    <Typography variant="body2" sx={{ marginBottom: 1 }}>
+                        <AccessTimeIcon sx={{ fontSize: "inherit", verticalAlign: "text-top" }} /> 建立於 {getAbsoluteTime(request.created_at)}，最後更新於 {getRelativeTime(request.updated_at)}
+                    </Typography>
+                    }
 
                     {request.assignment_notes && (
                         <Typography variant="body2" color="text.secondary">備註：{request.assignment_notes}</Typography>
